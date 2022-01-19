@@ -99,7 +99,8 @@ docker container logs -t <id_container | container_name>
     - É possivel criar varios conteiners a partir de uma mesma imagem
     - Aproveitamento de espaço pois quando criamos um outro container e utilizamos a mesma imagem, o docker faz apenas a referencia dessa imagem, sem necessidade de fazer a copia.
     - Gerenciamento de recursos para cada container
-### Formas para criação de Imagem
+## Formas para criação de Imagem
+#
 ### Docker commit
   - Não é uma boa pratica, pois os comandos são em "Tempo real" sendo dificil replicar.
   - Cria a imagem baseada em um container
@@ -107,9 +108,9 @@ docker container logs -t <id_container | container_name>
 ### Dockerfile
  - Modelo mais utilizado por boa pratica.
  - Segue uma "Receita" de instruções para criação de imagem baseado no Dockefile
-#### Codigo para criação do Dockerfile
-Definindo a origem da imagem
+### Codigo para criação do Dockerfile
 #
+Definindo a origem da imagem
 > FROM ubunto
 
 Execução de comandos para construção 
@@ -127,7 +128,16 @@ FROM ubunto
 RUN apt-get-update
 RUN apt-get-install curl --yes
 ```
+Após a criação do Dockerfile, você fazer o build da imagem a partir do arquivo, digite:
+```
+docker image build -t <image_name> <context>
+```
+> docker image build -t ubunto-curl-file .
 
-
-
-
+### Ponto de atenção no Dockerfile
+Caso execute novamente o build da imagem **ubunto-curl-file** veremos que há um processo de __cache__ que faz com que a execução seja mais rapida que a primeira vez.
+Veja que isso tem uma desvantagem, pois supundo que daqui algum tempo seja necessário implementar mais um comando no arquivo como:
+```
+RUN apt-get-install vim
+```
+Poderá ocorrer uma incompatibilidade, pois o cache estará armazenando uma informação desatualizada.
