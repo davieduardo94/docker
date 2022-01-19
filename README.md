@@ -100,7 +100,7 @@ docker container logs -t <id_container | container_name>
     - Aproveitamento de espaço pois quando criamos um outro container e utilizamos a mesma imagem, o docker faz apenas a referencia dessa imagem, sem necessidade de fazer a copia.
     - Gerenciamento de recursos para cada container
 ### Formas para criação de Imagem
-###Docker commit
+### Docker commit
   - Não é uma boa pratica, pois os comandos são em "Tempo real" sendo dificil replicar.
   - Cria a imagem baseada em um container
   - Insere as instruções dentro do container para assim, gerar a imagem final a partir do docker Commit
@@ -109,7 +109,7 @@ docker container logs -t <id_container | container_name>
  - Segue uma "Receita" de instruções para criação de imagem baseado no Dockefile
 #### Codigo para criação do Dockerfile
 Definindo a origem da imagem
-
+#
 > FROM ubunto
 
 Execução de comandos para construção 
@@ -120,6 +120,13 @@ Comando para atualização do repositorio Ubunto
 Comando para instalação do 'curl'
 
 > RUN apt-get-install curl --yes
+
+O arquivo final deve estar dessa forma
+```
+FROM ubunto
+RUN apt-get-update
+RUN apt-get-install curl --yes
+```
 
 
 
