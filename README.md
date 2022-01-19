@@ -90,7 +90,7 @@ docker container logs -t <id_container | container_name>
 ```
 > EX: docker container logs -t meu_container
 
-# Criação de imagens
+# 1 Criação de imagens
 - Imagens são um template para criar um container
 - Nela são inseridos todos os elementos para criação do container
 - Docker utiliza o overlay filesystem
@@ -99,8 +99,7 @@ docker container logs -t <id_container | container_name>
     - É possivel criar varios conteiners a partir de uma mesma imagem
     - Aproveitamento de espaço pois quando criamos um outro container e utilizamos a mesma imagem, o docker faz apenas a referencia dessa imagem, sem necessidade de fazer a copia.
     - Gerenciamento de recursos para cada container
-## Formas para criação de Imagem
-#
+## 1.1 Formas para criação de Imagem
 ### Docker commit
   - Não é uma boa pratica, pois os comandos são em "Tempo real" sendo dificil replicar.
   - Cria a imagem baseada em um container
@@ -108,7 +107,7 @@ docker container logs -t <id_container | container_name>
 ### Dockerfile
  - Modelo mais utilizado por boa pratica.
  - Segue uma "Receita" de instruções para criação de imagem baseado no Dockefile
-### Codigo para criação do Dockerfile
+### 1.2 Codigo para criação do Dockerfile
 #
 Definindo a origem da imagem
 > FROM ubunto
@@ -134,10 +133,35 @@ docker image build -t <image_name> <context>
 ```
 > docker image build -t ubunto-curl-file .
 
-### Ponto de atenção no Dockerfile
+### 2 Estrutura DockerFile
+
+**FROM** : iniciarliza o build de uma imagem a partir de uma imagem base
+**RUN**  : Executa um comando
+**LABEL**: Adicona metadados a imagem
+**CMD** : Define o comando e/ou parametros padrão
+**EXPOSE** : Define que o container precisa expor a porta em questão
+**AGR**: Define argumentos para ser usado no processo de construção
+**ENV**: Define variaveis de ambiente
+**ADD**: Copia arquivos ou diretorios ou arquivos remotos e adiciona ao sistema de arquivos da imagem
+**COPY** : Copia arquivos ou diretorios e adiciona ao sistema de arquivos da imagem
+**ENTRYPOINT** : Ajuda você a configurar um container que pode ser executado como executável
+**VOLUME**: Volumes que serão definidos
+**WORKDIR** : Define o diretorio de trabalho ou diretorio atual
+
+### 2.1 Ponto de atenção no Dockerfile
 Caso execute novamente o build da imagem **ubunto-curl-file** veremos que há um processo de __cache__ que faz com que a execução seja mais rapida que a primeira vez.
 Veja que isso tem uma desvantagem, pois supundo que daqui algum tempo seja necessário implementar mais um comando no arquivo como:
 ```
 RUN apt-get-install vim
 ```
 Poderá ocorrer uma incompatibilidade, pois o cache estará armazenando uma informação desatualizada.
+Para resolver esse caso podemos fazer a seguinte forma:
+Juntamos todas as instruções e assim quando for executado novamente o build, não será mais utilizado o cache.
+PS. NÃO É UMA REGRA, POIS MUITA DAS VEZES VOCÊ NÃO PRECISARAR ATUALIZAR DE FATO O REPOSITORIO!
+```
+FROM ubunto
+RUN apt-get-update && \ 
+    apt-get-install curl --yes && \ 
+    apt-get-install vim
+```
+
