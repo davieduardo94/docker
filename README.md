@@ -92,5 +92,21 @@ docker container logs -t <id_container | container_name>
 
 # Criação de imagens
 - Imagens são um template para criar um container
-- São criadas em camadas
+- Nela são inseridos todos os elementos para criação do container
+- Docker utiliza o overlay filesystem
+- São criadas em camadas de inserção de fileSystem em modo somente leitura, o resultado final dessa junção é a imagem Docker que utilizamos, porem é a camada de Leitura e Escrita
+  - Beneficios:
+    - É possivel criar varios conteiners a partir de uma mesma imagem
+    - Aproveitamento de espaço pois quando criamos um outro container e utilizamos a mesma imagem, o docker faz apenas a referencia dessa imagem, sem necessidade de fazer a copia.
+    - Gerenciamento de recursos para cada container
+### Formas para criação de Imagem
+- Docker commit
+  - Não é uma boa pratica, pois os comandos são em "Tempo real" sendo dificil replicar.
+  - Cria a imagem baseada em um container
+  - Insere as instruções dentro do container para assim, gerar a imagem final a partir do docker Commit
+- Dockerfile
+ - Modelo mais utilizado por boa pratia.
+ - Segue uma ''Receita'' de instruções para criação de imagem baseado no Dockefile
+ -
+
 
