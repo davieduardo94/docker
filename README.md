@@ -105,15 +105,20 @@ docker container logs -t <id_container | container_name>
   - Cria a imagem baseada em um container
   - Insere as instruções dentro do container para assim, gerar a imagem final a partir do docker Commit
 ### Dockerfile
- - Modelo mais utilizado por boa pratia.
- - Segue uma ''Receita'' de instruções para criação de imagem baseado no Dockefile
-> Codigo para criação do Dockerfiel
-- Definindo a origem da imagem
+ - Modelo mais utilizado por boa pratica.
+ - Segue uma "Receita" de instruções para criação de imagem baseado no Dockefile
+#### Codigo para criação do Dockerfile
+Definindo a origem da imagem
+
 > FROM ubunto
-- Execução de comandos para construção 
-- Comando para atualização do repositorio Ubunto
+
+Execução de comandos para construção 
+Comando para atualização do repositorio Ubunto
+
 > RUN apt-get-update
-- Comando para instalação do 'curl'
+
+Comando para instalação do 'curl'
+
 > RUN apt-get-install curl --yes
 
 
