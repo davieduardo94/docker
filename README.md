@@ -136,16 +136,27 @@ docker image build -t <image_name> <context>
 ### 2 Estrutura DockerFile
 
 **FROM** : iniciarliza o build de uma imagem a partir de uma imagem base
+
 **RUN**  : Executa um comando
+
 **LABEL**: Adicona metadados a imagem
+
 **CMD** : Define o comando e/ou parametros padrão
+
 **EXPOSE** : Define que o container precisa expor a porta em questão
+
 **AGR**: Define argumentos para ser usado no processo de construção
+
 **ENV**: Define variaveis de ambiente
+
 **ADD**: Copia arquivos ou diretorios ou arquivos remotos e adiciona ao sistema de arquivos da imagem
+
 **COPY** : Copia arquivos ou diretorios e adiciona ao sistema de arquivos da imagem
+
 **ENTRYPOINT** : Ajuda você a configurar um container que pode ser executado como executável
+
 **VOLUME**: Volumes que serão definidos
+
 **WORKDIR** : Define o diretorio de trabalho ou diretorio atual
 
 ### 2.1 Ponto de atenção no Dockerfile
